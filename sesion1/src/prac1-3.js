@@ -19,5 +19,7 @@ const geometry = new THREE.BoxGeometry( 100, 100, 100 );
 const material = new THREE.MeshBasicMaterial( );
 const box = new THREE.Mesh( geometry, material );
 
+box.rotation.set( Math.PI / 5, Math.PI / 5, 0 );
+
 scene.add( box );
 renderer.render( scene, camera );
