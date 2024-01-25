@@ -20,13 +20,27 @@ window.addEventListener( 'resize', ( ) => {
 }, false );
 
 const camera = new THREE.PerspectiveCamera ( 45, window.innerWidth / window.innerHeight, 1, 4000 );
-camera.position.set( 0, 0, 300 );
+camera.position.set( 0, 0, 800 );
 
-const geometry = new THREE.BoxGeometry( 100, 100, 100 );
-const material = new THREE.MeshBasicMaterial( );
-const box = new THREE.Mesh( geometry, material );
+const boxgeometry = new THREE.BoxGeometry( 100, 100, 100 );
+const boxmaterial = new THREE.MeshBasicMaterial( );
+const box = new THREE.Mesh( boxgeometry, boxmaterial );
+
+const cylindergeometry = new THREE.CylinderGeometry( 100, 100, 100 );
+const cylindermaterial = new THREE.MeshBasicMaterial( );
+const cylinder = new THREE.Mesh( cylindergeometry, cylindermaterial );
+cylinder.position.set(200, 0, 0);
+
+const spheregeometry = new THREE.SphereGeometry( 100, 100, 100 );
+const spherematerial = new THREE.MeshBasicMaterial( );
+const sphere = new THREE.Mesh( spheregeometry, spherematerial );
+sphere.position.set(0,200,0);
+
 
 box.rotation.set( Math.PI / 5, Math.PI / 5, 0 );
 
 scene.add( box );
+scene.add( cylinder);
+scene.add(sphere);
+
 renderer.render( scene, camera );
