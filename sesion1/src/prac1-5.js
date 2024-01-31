@@ -2,8 +2,13 @@ import * as THREE from 'three';
 
 import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
 
-if ( WEBGL.isWebGLAvailable() ) {
-    // WebGL is available
+if ( WEBGL.isWebGLAvailable() ) 
+{
+    //alert("WebGL is working");
+} 
+else 
+{
+    alert("WebGL error: " + WEBGL.getWebGLErrorMessage());
 }
 
 const scene = new THREE.Scene();
@@ -23,29 +28,30 @@ const camera = new THREE.PerspectiveCamera ( 45, window.innerWidth / window.inne
 camera.position.set( 0, 0, 300 );
 
 const geometry = new THREE.BufferGeometry();
-const vertices = new Float32Array( [
-    // Internal vertices
-    -inner, inner, 100,
-    inner, inner, 0,
-    inner, -inner, 0,
-    -inner, -inner, -100,
 
-    // External vertices
-    -outer, outer, 200,
-    outer, outer, 0,
-    outer, -outer, 0,
-    -outer, -outer, 200
-] );
+const inner = 50;
+const outer = 100;
+
+const vertices = new Float32Array([
+    // Base square vertices
+    -50, -50, 0,  // 0: bottom-left
+     50, -50, 0,  // 1: bottom-right
+     50,  50, 0,  // 2: top-right
+    -50,  50, 0,  // 3: top-left
+
+    // Roof vertices
+    -50,  50, 0,  // 4: same as 3
+     50,  50, 0,  // 5: same as 2
+     0,  100, 0   // 6: peak of the roof
+]);
 // Faces (indices of vertices)
 const indices = [
-    5, 4, 0,
-    0, 1, 5,
-    6, 5, 1,
-    1, 2, 6,
-    7, 6, 2,
-    2, 3, 7,
-    4, 7, 3,
-    3, 0, 4
+    // Base square (two triangles)
+    0, 1, 2,
+    2, 3, 0,
+
+    // Roof (one triangle)
+    4, 5, 6
 ];
 
 geometry.setIndex( indices );

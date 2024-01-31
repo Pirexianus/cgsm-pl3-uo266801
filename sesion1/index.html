@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Informe de prácticas de CGSM (2023-2024)</title>
+        <link rel="stylesheet" type="text/css" href="report.css">
+    </head>
+    <body>
+        <!-- Información general -->
+        <div id="head">
+            <table id="general">
+                <tr>
+                    <th class="header">Nombre:</th>
+                    <td>Miguel Cancelas Robles</td>                     
+                </tr>
+                <tr>
+                    <th>Práctica:</th>
+                    <td>1</td> 
+                </tr>
+            </table>
+        </div>
+        <div id="content">
+            <h1>Memoria</h1>
+            <h2>Descripción de la práctica</h2>
+            <p>En este práctica inicial, echamos un primer vistazo a los elementos gráficos desarrollados con javascrip, basados en el estándar WebGL y su API three.js</p>
+            <p>En primer lugar, se prepara el entorno de trabajo: el editor de texto visual studio code, la herramienta de gestión de dependencias nmp y el repositorio de versiones git que contendrá los proyectos que se desarrollarán en el curso.</p>
+            <p>A continuación, empezaremos a trabajar en el ejercicio, comenzando con ejemplos básicos para aumentar la dificultad y comprender cómo preparar una escena y qué clases y parámetros están disponibles en three.js.</p>
+            <p>Empezaremos con un ejemplo que muestra texto continuamos con un cubo, luego añadiremos una esfera, un cilindro... finalmente trabajaremos con los hechos a mano.</p>
+
+            <h2>Ejercicio 1</h2>
+                <p>Prueba de que WebGL esté habilitado.</p>
+                <ol>
+                    <li>Implementar una alerta de javascript en el código que se proporciona para avisar en caso de que WebGL esté deshabilitado.</li>
+                    <li>Muestra un texto sobre el lienzo en caso de que todo funcione</li>
+                </ol>
+                <iframe class="container" src="prac1-1.html"">
+                    Escena 1                
+                </iframe>
+            <h2>Ejercicio 2</h2>
+                <p>Escena con un objeto simple.</p>
+                <ol>
+                    <li>Crear una escena con un cubo centrado en el origen de coordenadas, y una cámara mirándolo desde el eje Z, con lo que parece un cuadrado plano.</li>
+                    <li><b>Respuesta 1:</b> Es el resultado que esperaba, dado que la cámara está frente al cubo alienada horizontalmente.</li>
+                    <li><b>Respuesta 2:</b> Sí, el cubo se ve como un cuadrado plano por la posición de la cámara.</li>
+                </ol>
+                <iframe class="container" src="prac1-2.html">
+                    Escena 2
+                </iframe>
+            <h2>Ejercicio 3</h2>
+                <p>Escena con un objeto simpel que se aprecie en 3 dimensiones.</p>
+                <ol>
+                    <li>Crear la misma escena con el cubo centrado en el origen de coordenadas, y una cámara mirándolo desde el eje Z.</li>
+                    <li>Rotar ligeramente el cubo de forma que se aprecie que es una figura tridimensional.</li>
+                    <li>Además, se añade un evento resize para que la escena se adapte a la ventana del navegador.</li>
+                </ol>
+                <iframe class="container" src="prac1-3.html">
+                    Escena 3
+                </iframe>
+            <h2>Ejercicio 4</h2>
+                <p>Escena con 3 objetos simples</p>
+                <ol>
+                    <li>Crear una escena con un cubo, una esfera y un cilindro dispuestos horizontalmente, y una cámara mirándolos desde el eje Z.</li>
+                    <li>Rotar ligeramente los objetos de forma que se aprecie que son figuras tridimensionales.</li>
+                </ol>
+                <iframe class="container" src="prac1-4.html">
+                        Escena 4
+                </iframe>
+            <h2>Ejercicio 5</h2>
+                <p>Escena con objetos complejos en forma de casa</p>
+                <ol>
+                    <li>Crear una escena con tres triángulos, formando un cuadrado con el último triángulo encima, creando una forma de casa.</li>
+                </ol>
+                <iframe class="container" src="prac1-5.html">
+                    Escena 5
+                </iframe>
+            <h2>Ejercicio 6</h2>
+                <p>Escena con objetos simples y complejos usando materiales y luces</p>
+                <ol>
+                    <li>Crear una escena con los objetos de las escenas 4 y 5, y una cámara mirándolos desde el eje Z.</li>
+                    <li>Usar distintos materiales y colores para los objetos.</li>
+                    <li>Colocar una luz direccional para que se vean de forma similar a la muestra del guion de prácticas.</li>
+                </ol>
+                <iframe class="container" src="prac1-6.html">
+                    Escena 6
+                </iframe>
+            <h2>Dificultades encontradas</h2>
+            <ol>
+                <li>En la escena 5, resultó desafiante comprender los índices, su orden y su relación con los vértices.</li>
+                <li>Los triángulos correctos son el resultado de un proceso de prueba y error.</li>
+                <li>En la escena 6, colocar la luz direccional correctamente fue otro proceso de prueba y error.</li>
+            </ol>
+        </div>
+    </body>
+</html>
