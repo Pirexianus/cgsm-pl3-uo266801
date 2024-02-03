@@ -11,6 +11,7 @@ else
     alert("WebGL error: " + WEBGL.getWebGLErrorMessage());
 }
 
+const clock = new THREE.Clock( );
 const scene = new THREE.Scene();
 
 const renderer = new THREE.WebGLRenderer( {antialias: true} );
@@ -41,4 +42,21 @@ scene.add(pointLight);
 
 scene.add(sphere);
 
-renderer.render( scene, camera );
+animate( );
+function animate( ) 
+{
+    const delta = clock.getDelta( ); // Elapsed time in seconds
+
+    // UPDATE THE SCENE ACCORDING TO THE ELAPSED TIME
+    const rotation = ( delta * Math.PI * 2 ) / 24;
+    sphere.rotation.y += rotation;
+    //atmosphere.rotation.y += rotation * 0.95;
+
+    // Render the scene
+    renderer.render( scene, camera );
+
+    // Request the browser to execute the animation-rendering loop
+    requestAnimationFrame( animate );
+};
+
+//renderer.render( scene, camera );
