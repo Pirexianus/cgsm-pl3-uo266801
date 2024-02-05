@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Informe de prácticas de CGSM (2023-2024)</title>
+        <link rel="stylesheet" type="text/css" href="report.css">
+    </head>
+    <body>
+        <!-- Información general -->
+        <div id="head">
+            <table id="general">
+                <tr>
+                    <th class="header">Nombre:</th>
+                    <td>Miguel Cancelas Robles</td>                     
+                </tr>
+                <tr>
+                    <th>Práctica:</th>
+                    <td>2</td> 
+                </tr>
+            </table>
+        </div>
+        <div id="content">
+            <h1>Memoria</h1>
+            <h2>Descripción de la práctica</h2>
+            <p>La segunda práctica profundiza en el uso de three.js para añadir texturas y animaciones e importar modelos 3d.</p>
+            <p>A través de diferentes ejercicios, se realizará una escena que represente el movimiento de la tierra y la luna alrededor del sol.</p>
+			<p>Se comprobará que todos los objetos tienen la relación de tamaño correcta entre ellos, salvo el sol que sería demsiado grande</p>
+            <h2>Ejercicio 1</h2>
+                <p>Cubo con textura de caja.</p>
+                <ol>
+                    <li>Crear un cubo y añadirle una textura de caja al material.</li>
+                </ol>
+                <iframe class="container" src="prac2-1.html"">
+                    Escena 1                
+                </iframe>
+            <h2>Ejercicio 2</h2>
+                <p>Esfera con textura de la tierra.</p>
+                <ol>
+                    <li>Crear una esfera y añadirle la textura de la tierra al material.</li>
+                    <li>Añadir luz direccional ajustada para iluminar parcialmente el material de la esfera</li>
+                </ol>
+                <iframe class="container" src="prac2-2.html">
+                    Escena 2
+                </iframe>
+            <h2>Ejercicio 3</h2>
+                <p>Tierra con atmósfera.</p>
+                <ol>
+                    <li>Añadir una segunda esfera con la textura de la atmósfera a la de la tierra.</li>
+                    <li>Añadirle transparencia al material para conseguir el efecto deseado</li>
+                </ol>
+                <iframe class="container" src="prac2-3.html">
+                    Escena 3
+                </iframe>
+            <h2>Ejercicio 4</h2>
+                <p>Objeto 3d de tierra inclinada</p>
+                <ol>
+                    <li>Agregar ambas esferas a un grupo 3d para transformarlas conjuntamente.</li>
+                    <li>Inclinar el grupo como corresponde con la inclinación de la tierra.</li>
+                </ol>
+                <iframe class="container" src="prac2-4.html">
+                        Escena 4
+                </iframe>
+            <h2>Ejercicio 5</h2>
+                <p>Tierra con Luna</p>
+                <ol>
+                    <li>Añadir una esfera con textura de Luna del tamaño adecuado y ubicarla a una distancia proporcional.</li>
+                </ol>
+                <iframe class="container" src="prac2-5.html">
+                    Escena 5
+                </iframe>
+            <h2>Ejercicio 6</h2>
+                <p>Animación de la rotación de la tierra</p>
+                <ol>
+                    <li>Añadir el código correspondiente para posibilitar animaciones y hacer girar las esferas de la tierra y la atmósfera con el efecto deseado.</li>
+                </ol>
+                <iframe class="container" src="prac2-6.html">
+                    Escena 6
+                </iframe>
+            <h2>Ejercicio 7</h2>
+                <p>Animación de la rotación de la Luna</p>
+                <ol>
+                    <li>Animar el grupo 3d con la tierra y la Luna para que esta rote arededor del planeta en el periodo deseado.</li>
+                </ol>
+                <iframe class="container" src="prac2-7.html">
+                    Escena 7
+                </iframe>
+            <h2>Ejercicio 8</h2>
+                <p>Animación de la Tierra y la Luna con el Sol</p>
+                <ol>
+                    <li>Añadir el código necesario para hacer shaders con los que animar la superficie cambiante del Sol y crear una esfera con ellos para representarlo.</li>
+                    <li>Ajustar la escala del Sol y poner la luz en su mismo punto.</li>
+                </ol>
+                <iframe class="container" src="prac2-8.html">
+                    Escena 8
+                </iframe>
+            <h2>Ejercicio 9</h2>
+                <p>Modelo de la estación espacial internacional</p>
+                <ol>
+                    <li>Importar y mostrar un modelo 3d externo de la estación espacial internacional.</li>
+                </ol>
+                <iframe class="container" src="prac2-9.html">
+                    Escena 8
+                </iframe>
+            <h2>Dificultades encontradas</h2>
+            <ol>
+                <li>En la escena 5, resultó desafiante comprender los índices, su orden y su relación con los vértices.</li>
+                <li>Los triángulos correctos son el resultado de un proceso de prueba y error.</li>
+                <li>En la escena 6, colocar la luz direccional correctamente fue otro proceso de prueba y error.</li>
+            </ol>
+        </div>
+    </body>
+</html>
