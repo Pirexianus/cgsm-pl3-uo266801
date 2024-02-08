@@ -1,7 +1,5 @@
 import * as THREE from 'three';
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min';
 import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
-import Stats from 'three/examples/jsm/libs/stats.module';
 
 if ( WEBGL.isWebGLAvailable() ) 
 {
@@ -17,10 +15,6 @@ const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer( {antialias: true} );
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
-const stats = new Stats( );
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.top = '0px';
-document.body.appendChild( stats.domElement );
 window.addEventListener( 'resize', ( ) => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix( );
@@ -30,26 +24,46 @@ window.addEventListener( 'resize', ( ) => {
 const camera = new THREE.PerspectiveCamera ( 45, window.innerWidth / window.innerHeight, 1, 4000 );
 camera.position.set( 0, 0, 300 );
 
-const geometry = new THREE.BoxGeometry( 100, 100, 100 );
+const helper = new THREE.GridHelper( 800, 40, 0x444444, 0x444444 );
+helper.position.y = 0.1;
+
+const material = new THREE.MeshBasicMaterial();
+const specialFaceMaterial = "textures/special-brick.png";
+const regularFaceMaterial = "textures/brick.png"
+// A box has 6 faces
+const materials = [
+    specialFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+];
+const geometry = new THREE.BoxGeometry( 25, 25, 25 );
 const textureLoader = new THREE.TextureLoader( );  // The object used to load textures
-const material = new THREE.MeshPhongMaterial(
-    {
-        map: textureLoader.load( "textures/brick.jpg" ),
-        bumpMap: textureLoader.load( "textures/brick-map.jpg" )
-    } );
-const box = new THREE.Mesh( geometry, material );
-box.rotation.set( Math.PI / 5, Math.PI / 5, 0 );
+
+// Creación del primer cubo
+const box1 = new THREE.Mesh(geometry, materials);
+box1.position.set(-100, 15, 0); // Posición alejada dentro del plano
+
+// Creación y posición del segundo cubo
+const box2 = new THREE.Mesh(geometry, material);
+box2.position.set(100, 15, 0); // Posición alejada en el lado opuesto dentro del plano
+
+// Ajuste de rotaciones para que las caras distintas se enfrenten
+box2.rotation.y = Math.PI; // Gira el segundo cubo para enfrentar su cara especial hacia el otro cubo
+
+// Añadir los cubos a la escena
+scene.add(box1);
+scene.add(box2);
 
 const directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
-directionalLight.position.set( 0, 400, 400 );
+directionalLight.position.set( 0, 0.5, 100 );
+const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xf0f0f0, 0.6 );
+hemiLight.position.set( 0, 500, 0 );
+scene.add( hemiLight )
 
-const controlData = {
-    bumpScale: material.bumpScale
-}
-const gui = new GUI( );
-gui.add( controlData, 'bumpScale', -4, 4 ).step(0.1).name( 'bumpScale' );
-
-scene.add( box );
+scene.add(helper);
 scene.add(directionalLight);
 const clock = new THREE.Clock( );
 
@@ -59,9 +73,6 @@ function animate( ) {
 
     // UPDATE THE SCENE ACCORDING TO THE ELAPSED TIME
     const Rotation = 0.01;
-    box.rotation.y+=Rotation;
-    material.bumpScale = controlData.bumpScale;
-    stats.update( );
     
     // Render the scene
     renderer.render( scene, camera );
