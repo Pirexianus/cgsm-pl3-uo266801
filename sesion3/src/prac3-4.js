@@ -27,9 +27,10 @@ camera.position.set( 0, 0, 300 );
 const helper = new THREE.GridHelper( 800, 40, 0x444444, 0x444444 );
 helper.position.y = 0.1;
 
+const textureLoader = new THREE.TextureLoader( );  // The object used to load textures
 const material = new THREE.MeshBasicMaterial();
-const specialFaceMaterial = "textures/special-brick.png";
-const regularFaceMaterial = "textures/brick.png"
+const specialFaceMaterial = textureLoader.load("textures/special-brick.png");
+const regularFaceMaterial = textureLoader.load("textures/brick.png");
 // A box has 6 faces
 const materials = [
     specialFaceMaterial,
@@ -40,7 +41,6 @@ const materials = [
     regularFaceMaterial,
 ];
 const geometry = new THREE.BoxGeometry( 25, 25, 25 );
-const textureLoader = new THREE.TextureLoader( );  // The object used to load textures
 
 // Creación del primer cubo
 const box1 = new THREE.Mesh(geometry, materials);
