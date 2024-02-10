@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import WEBGL from 'three/examples/jsm/capabilities/WebGL.js';
+import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls.js';
 
 if ( WEBGL.isWebGLAvailable() ) 
 {
@@ -10,8 +11,8 @@ else
     alert("WebGL error: " + WEBGL.getWebGLErrorMessage());
 }
 
+// Common boilerpalte code
 const scene = new THREE.Scene();
-
 const renderer = new THREE.WebGLRenderer( {antialias: true} );
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
@@ -22,17 +23,32 @@ window.addEventListener( 'resize', ( ) => {
     renderer.render( scene, camera );
 }, false );
 const camera = new THREE.PerspectiveCamera ( 45, window.innerWidth / window.innerHeight, 1, 4000 );
-camera.position.set( 0, 0, 300 );
+camera.position.set( 0, 10, 300 );
 
+// Controls
+const controls = new FirstPersonControls( camera, renderer.domElement );
+controls.movementSpeed = 70;
+controls.lookSpeed = 0.05;
+controls.noFly = false;
+controls.lookVertical = false;
+
+// GRID
 const helper = new THREE.GridHelper( 800, 40, 0x444444, 0x444444 );
 helper.position.y = 0.1;
 
+// Textures
 const textureLoader = new THREE.TextureLoader( );  // The object used to load textures
-const material = new THREE.MeshBasicMaterial();
-const specialFaceMaterial = textureLoader.load("textures/special-brick.png");
-const regularFaceMaterial = textureLoader.load("textures/brick.png");
-// A box has 6 faces
-const materials = [
+const specialmapUrl = "../textures/special-brick.png";  
+const regularmapUrl = "../textures/brick.png";  
+const specialmap = textureLoader.load( specialmapUrl, ( loaded ) => { renderer.render( scene, camera ); } );
+const regularmap = textureLoader.load( regularmapUrl, ( loaded ) => { renderer.render( scene, camera ); } );
+const specialFaceMaterial = new THREE.MeshPhongMaterial( { 
+    map: specialmap,
+    bumpMap: textureLoader.load( "../textures/special-brick-map.png" ) } ); // Material for a face
+const regularFaceMaterial = new THREE.MeshPhongMaterial( {
+     map: regularmap,
+     bumpMap: textureLoader.load( "../textures/brick-map.jpg") } );  // Material for the rest of the faces
+const materials = [// A box has 6 faces
     specialFaceMaterial,
     regularFaceMaterial,
     regularFaceMaterial,
@@ -40,39 +56,34 @@ const materials = [
     regularFaceMaterial,
     regularFaceMaterial,
 ];
+
+// Boxes
 const geometry = new THREE.BoxGeometry( 25, 25, 25 );
-
-// Creación del primer cubo
 const box1 = new THREE.Mesh(geometry, materials);
-box1.position.set(-100, 15, 0); // Posición alejada dentro del plano
+box1.position.set(-100, 12.5, 0);
+const box2 = new THREE.Mesh(geometry, materials);
+box2.position.set(100, 12.5, 0);
+box2.rotation.y = Math.PI;
 
-// Creación y posición del segundo cubo
-const box2 = new THREE.Mesh(geometry, material);
-box2.position.set(100, 15, 0); // Posición alejada en el lado opuesto dentro del plano
-
-// Ajuste de rotaciones para que las caras distintas se enfrenten
-box2.rotation.y = Math.PI; // Gira el segundo cubo para enfrentar su cara especial hacia el otro cubo
-
-// Añadir los cubos a la escena
-scene.add(box1);
-scene.add(box2);
-
+// Lights
 const directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
 directionalLight.position.set( 0, 0.5, 100 );
 const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xf0f0f0, 0.6 );
 hemiLight.position.set( 0, 500, 0 );
-scene.add( hemiLight )
 
 scene.add(helper);
+scene.add(box1);
+scene.add(box2);
 scene.add(directionalLight);
-const clock = new THREE.Clock( );
+scene.add( hemiLight )
 
+const clock = new THREE.Clock( );
 function animate( ) {
 
     const delta = clock.getDelta( ); // Elapsed time in seconds
 
     // UPDATE THE SCENE ACCORDING TO THE ELAPSED TIME
-    const Rotation = 0.01;
+    controls.update( delta );
     
     // Render the scene
     renderer.render( scene, camera );
