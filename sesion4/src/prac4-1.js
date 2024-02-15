@@ -45,7 +45,7 @@ helper.position.y = 0.1;
 // Textures
 const textureLoader = new THREE.TextureLoader( );  // The object used to load textures
 const specialmapUrl = "../textures/special-brick.png";  
-const regularmapUrl = "../textures/brick.png";  
+const regularmapUrl = "../textures/brick.jpg";  
 const specialmap = textureLoader.load( specialmapUrl, ( loaded ) => { renderer.render( scene, camera ); } );
 const regularmap = textureLoader.load( regularmapUrl, ( loaded ) => { renderer.render( scene, camera ); } );
 const specialFaceMaterial = new THREE.MeshPhongMaterial( { 

@@ -112,7 +112,15 @@ const regularFaceMaterial = new THREE.MeshPhongMaterial( {
 const primeFaceMaterial = new THREE.MeshPhongMaterial( {
     map: primemap,
     bumpMap: textureLoader.load( "../textures/brick-map.jpg") } );  // Material for the TRIGGERED face
-const materials = [// A box has 6 faces
+const materials1 = [// A box has 6 faces
+    specialFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+    regularFaceMaterial,
+];
+const materials2 = [// A box has 6 faces
     specialFaceMaterial,
     regularFaceMaterial,
     regularFaceMaterial,
@@ -123,10 +131,10 @@ const materials = [// A box has 6 faces
 
 // Boxes
 const geometry = new THREE.BoxGeometry( 25, 25, 25 );
-const box1 = new THREE.Mesh(geometry, materials);
+const box1 = new THREE.Mesh(geometry, materials1);
 box1.name = "box1";
 box1.position.set(-100, 12.5, 0);
-const box2 = new THREE.Mesh(geometry, materials);
+const box2 = new THREE.Mesh(geometry, materials2);
 box2.name = "box2";
 box2.position.set(100, 12.5, 0);
 box2.rotation.y = Math.PI;
