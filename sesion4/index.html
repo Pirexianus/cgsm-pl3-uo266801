@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Informe de prácticas de CGSM (2023-2024)</title>
+        <link rel="stylesheet" type="text/css" href="report.css">
+    </head>
+    <body>
+        <!-- Información general -->
+        <div id="head">
+            <table id="general">
+                <tr>
+                    <th class="header">Nombre:</th>
+                    <td>Miguel Cancelas Robles</td>                     
+                </tr>
+                <tr>
+                    <th>Práctica:</th>
+                    <td>4</td> 
+                </tr>
+            </table>
+        </div>
+        <div id="content">
+            <h1>Memoria</h1>
+            <h2>Descripción de la práctica</h2>
+            <p>La cuarta práctica profundiza en el espacio 3D de la escena y las posibilidades ofrecidas por los controles para que el usuario interactue con ella.</p>
+            <p>También introduce los sonidos y sus mecánicas básicas, así como las intersecciones de objetos conforme el usuario navega,</p>
+			<p>que permiten implementar características tales como la detección de colisiones</p>
+            <h2>Ejercicio 1</h2>
+                <p>Cubos con sonido posicional.</p>
+                <ol>
+                    <li>Añadir un sonido posicional a cada cubo de modo que al desplazarse por la escena se oya más uno u otro.</li>
+                </ol>
+                <iframe class="container" src="prac4-1.html"">
+                    Escena 1                
+                </iframe>
+            <h2>Ejercicio 2</h2>
+                <p>Intersección con objetos.</p>
+                <ol>
+                    <li>Añadir la funcionalidad para detectar cuando la visión de la cámara intersecta, en su posición en ese momento, con un objeto de la escena.</li>
+                    <li>Mostrar por consola cada vez que se intersecta con un nuevo objeto</li>
+                </ol>
+                <iframe class="container" src="prac4-2.html">
+                    Escena 2
+                </iframe>
+            <h2>Ejercicio 3</h2>
+                <p>Selección de objetos por el usuario.</p>
+                <ol>
+                    <li>Modificar el código anterior para que se seleccione el objeto actualmente intersectado al pulsar la barra espaciadora.</li>
+                </ol>
+                <iframe class="container" src="prac4-3.html">
+                    Escena 3
+                </iframe>
+            <h2>Ejercicio 4</h2>
+                <p>Encender y apagar cubos de audio</p>
+                <ol>
+                    <li>Modificar el código anterior para que al seleccionar un cubo se modifique su textura y su sonido se detenga o reanude.</li>
+                </ol>
+                <iframe class="container" src="prac4-4.html">
+                        Escena 4
+                </iframe>
+            <h2>Dificultades encontradas</h2>
+            <ol>
+                <li>AL principio busqué los mensajes de intersecciones en OTRA consola del navegador en la que no aparecían.</li>
+                <li>En la última escena, la textura de ambas cajas se cambiaba a la vez al compartir material.</li>
+            </ol>
+        </div>
+    </body>
+</html>
