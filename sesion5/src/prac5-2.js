@@ -25,7 +25,7 @@ window.addEventListener( 'resize', ( ) => {
 const camera = new THREE.PerspectiveCamera ( 45, window.innerWidth / window.innerHeight, 1, 4000 );
 camera.position.set( 0, 0, 300 );
 
-const video = document.getElementById( 'video' );
+const video = document.getElementById( 'player' );
 const image = document.createElement( 'canvas' );
 image.width = 480;  // Video width
 image.height = 204; // Video height
@@ -61,6 +61,12 @@ function animate( ) {
     // Request the browser to execute the animation-rendering loop
     requestAnimationFrame( animate );
 };
+
+var url = "https://dash.akamaized.net/dash264/TestCases/1a/sony/SNE_DASH_SD_CASE1A_REVISED.mpd";  //pc de casa
+var player = dashjs.MediaPlayer().create();
+player.initialize(document.querySelector("#player"), url, true);
+
+player.play();
 animate(); 
 
 //renderer.render( scene, camera );
