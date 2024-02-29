@@ -22,41 +22,53 @@ startButton.onclick = start;
 callButton.onclick = call;
 hangupButton.onclick = hangup;
 
-// Start button handler, start local video capture on destiny video element
-function start(){
+// Start local stream on remote video
+function start() {
     startButton.disabled = true;
-    navigator.mediaDevices.getUserMedia( { video: true, audio: true } )
-        .then( gotStream )
-        .catch( ( e ) => { console.log( 'getUserMedia() error: ', e ); } );
+    navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true
+    })
+    .then(( gotStream ) => 
+    {
+        localVideo.srcObject = gotStream;
+        localStream = gotStream;
+        callButton.disabled = false;
+    })
+    .catch( (e) => { console.log('getUserMedia() error: ' + e.name); });
 }
 
-// TODO: Update UI (state of the buttons)
+function call() {
+    // Update UI (state of the buttons)
+    callButton.disabled = true;
+    hangupButton.disabled = false;
 
-// No STUN/TURN servers
-const servers = null;
+    // No STUN/TURN servers
+    const servers = null;
 
-// Local peer of the connection (caller)
-//   - create the local peer
-//   - bind the handler for receiving ICE candidates
-localPeerConnection = new RTCPeerConnection( servers );
-localPeerConnection.onicecandidate = gotLocalIceCandidate;
+    // Local peer of the connection (caller)
+    //   - create the local peer
+    //   - bind the handler for receiving ICE candidates
+    localPeerConnection = new RTCPeerConnection( servers );
+    localPeerConnection.onicecandidate = gotLocalIceCandidate;
 
-// The same for the remote peer (callee)
-// We are calling ourselves
-//    - create the remote peer
-//    - bind the handler for receiving ICE candidates
-//    - bind the handler for receiving the counterpart stream
-remotePeerConnection = new RTCPeerConnection( servers );
-remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
-remotePeerConnection.ontrack = gotRemoteTrack;
+    // The same for the remote peer (callee)
+    // We are calling ourselves
+    //    - create the remote peer
+    //    - bind the handler for receiving ICE candidates
+    //    - bind the handler for receiving the counterpart stream
+    remotePeerConnection = new RTCPeerConnection( servers );
+    remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
+    remotePeerConnection.ontrack = gotRemoteTrack;
 
-// Add local stream to the connection. This will trigger the onaddstream event
-// in the other side (the remote, callee)
-localStream.getTracks().forEach( track => localPeerConnection.addTrack( track, localStream ) );
+    // Add local stream to the connection. This will trigger the onaddstream event
+    // in the other side (the remote, callee)
+    localStream.getTracks().forEach( track => localPeerConnection.addTrack( track, localStream ) );
 
-// Start negotiation: the description depends on the streams added to the connection
-// This description is requested asynchronously
-localPeerConnection.createOffer( offerOptions ).then( gotLocalDescription );
+    // Start negotiation: the description depends on the streams added to the connection
+    // This description is requested asynchronously
+    localPeerConnection.createOffer( offerOptions ).then( gotLocalDescription );
+}
 
 function gotLocalDescription( description ){
 
